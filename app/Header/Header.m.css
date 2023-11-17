@@ -1,0 +1,11 @@
+.header {
+  background-color: var(--bg-black);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.21);
+}
+
+.icon {
+  fill: white;
+}

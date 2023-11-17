@@ -1,0 +1,133 @@
+# This folder is cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - dist/
+
+stages:
+  - init
+  - test
+  - build
+  - deploy
+
+init:
+  image: node:10
+  stage: init
+  script:
+    - node -v
+    - npm -v
+    - npm install
+  artifacts:
+    paths:
+    - node_modules/
+
+lint:
+  image: node:10
+  stage: test
+  script:
+    - node -v
+    - npm -v
+    - npm run lint
+
+typecheck:
+  image: node:10
+  stage: test
+  script:
+    - node -v
+    - npm -v
+    - npx tsc --jsx react --noEmit app/app.tsx
+
+build:
+  image: node:10
+  stage: build
+  script:
+    - node -v
+    - npm -v
+    - npm run build
+  artifacts:
+    paths:
+    - dist/
+
+
+deploy-front-dev:
+  image: docker:stable
+  cache: {}
+  before_script:
+    - ''
+  only:
+    refs:
+      - develop
+  variables:
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  stage: deploy
+  script:
+    - docker -v
+    - docker build -f Dockerfile.front -t react-scaffold-front .
+    - echo $DOCKER_PASS | docker login --username $DOCKER_LOGIN --password-stdin
+    - docker tag react-scaffold-front:latest tsears/react-scaffold-front:develop
+    - docker push tsears/react-scaffold-front:develop
+
+deploy-back-dev:
+  image: docker:stable
+  cache: {}
+  before_script:
+    - ''
+  only:
+    refs:
+      - develop
+  variables:
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  stage: deploy
+  script:
+    - docker -v
+    - docker build -f Dockerfile.back -t react-scaffold-back .
+    - echo $DOCKER_PASS | docker login --username $DOCKER_LOGIN --password-stdin
+    - docker tag react-scaffold-back:latest tsears/react-scaffold-back:develop
+    - docker push tsears/react-scaffold-back:develop
+
+
+deploy-front-prod:
+  image: docker:stable
+  cache: {}
+  before_script:
+    - ''
+  only:
+    refs:
+      - master
+  variables:
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  stage: deploy
+  script:
+    - docker -v
+    - docker build -f Dockerfile.front -t react-scaffold-front .
+    - echo $DOCKER_PASS | docker login --username $DOCKER_LOGIN --password-stdin
+    - docker tag react-scaffold-front:latest tsears/react-scaffold-front:prod
+    - docker push tsears/react-scaffold-front:prod
+
+deploy-back-prod:
+  image: docker:stable
+  cache: {}
+  before_script:
+    - ''
+  only:
+    refs:
+      - master
+  variables:
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  stage: deploy
+  script:
+    - docker -v
+    - docker build -f Dockerfile.back -t react-scaffold-back .
+    - echo $DOCKER_PASS | docker login --username $DOCKER_LOGIN --password-stdin
+    - docker tag react-scaffold-back:latest tsears/react-scaffold-back:prod
+    - docker push tsears/react-scaffold-back:prod

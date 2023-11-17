@@ -1,0 +1,8 @@
+.body {
+  flex-grow: 1;
+  padding: 2rem;
+}
+
+.heading {
+  margin-bottom: 1rem;
+}

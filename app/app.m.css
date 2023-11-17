@@ -1,0 +1,18 @@
+.app {
+  min-height: 100%;
+  width: 100%;
+
+  background-color: var(--bg-darkgray);
+  color: var(--text-white);
+
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+  bottom:0;
+  right: 0;
+}
+
+.body {
+  flex-grow: 1;
+}
