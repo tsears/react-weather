@@ -1,14 +1,16 @@
 /* eslint-env node */
-/* eslint @typescript-eslint/no-var-requires: 0 */
-'use strict'
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const path = require('path')
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+const config = {
   mode: process.env.BUILD_MODE || 'development',
   context: __dirname,
   entry: {
@@ -22,7 +24,7 @@ module.exports = {
     library: '[name]',
     libraryTarget: 'umd',
   },
-  devtool: 'source-map',
+  devtool: 'eval',
   module: {
     rules: [
       {
@@ -89,26 +91,23 @@ module.exports = {
   // Webpack hosts the files here. Also serves as a reverse proxy to
   // localProxy/proxy.js.
   devServer: {
+    hot: true,
     host: '0.0.0.0',
     port: 9000,
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    proxy: [
-      {
-        path: '/**',
-        quiet: false,
-        noInfo: false,
-        logLevel: 'debug',
-        changeOrigin: true,
-        stats: { color: true },
+    proxy: {
+      '/**': {
         toProxy: true,
         target: 'http://localhost:8081',
-        pathRewrite: { '^/api': '' }, // rewrite /api to /
-        context: [
-          '/api/**',
-        ],
+        pathRewrite: {
+          // rewrite /api to /
+          '^/api': ''
+        },
       },
-    ],
+    },
   },
 }
+
+export default config

@@ -1,4 +1,4 @@
-# React Weather
+# Weather
 
 Simple weather site.
 
@@ -32,4 +32,4 @@ application.
 
 ## License
 
-MIT.  See LICENSE.
+MIT. See LICENSE.

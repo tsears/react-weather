@@ -1,4 +1,5 @@
 import 'css/index.scss'
+import 'types/csshelper'
 import * as styles from './app.m.css'
 
 import { Header } from './Header/Header'

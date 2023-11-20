@@ -62,6 +62,7 @@ module.exports = {
         ],
       },
     },
+    {
     // for now, the backend is pure js, no need for typescript linting rules
       files: ['server/**/*.js'],
       settings: {

@@ -5,7 +5,7 @@ const currentYear = new Date().getFullYear()
 
 export const Footer: React.FunctionComponent<{}> = (): React.ReactElement => (
   <div className={styles.footer}>
-    <div>React Scaffold</div>
+    <div>Weather</div>
     <div>&copy;{currentYear} Tom Sears</div>
   </div>
 )

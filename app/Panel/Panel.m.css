@@ -1,0 +1,6 @@
+.panel {
+  border-radius: 5px;
+  padding: 3em;
+  background-color: var(--bg-lightgray);
+  box-shadow: 4.0px 8.0px 8.0px hsl(0deg 0% 0% / 0.38);
+}
