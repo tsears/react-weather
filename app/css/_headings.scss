@@ -3,24 +3,23 @@
 $step-size-heading: 0.3;
 /* The mixin */
 @mixin heading-size($size) {
-  font-family: 'Open Sans', serif;
   font-size: $size * $step-size-heading * 2 + rem;
 }
+
+$start: 6;
+@each $h in h1, h2, h3, h4, h5, h6 {
+  #{$h} {
+    @include heading-size($start);
+    font-family: 'Cantarell', Helvetica, Arial, sans-serif;
+    letter-spacing: -2px;
+  }
+
+  $start: $start - 1
+}
+
 h1 {
-    @include heading-size(6);
-}
-h2 {
-    @include heading-size(5);
-}
-h3 {
-    @include heading-size(4);
-}
-h4 {
-    @include heading-size(3);
-}
-h5 {
-    @include heading-size(2);
-}
-h6 {
-    @include heading-size(1);
+  font-family: 'Fjalla One', Helvetica, Arial, sans-serif;
+  letter-spacing: 3px;
+  text-shadow: 3px 3px #555;
+  text-transform: uppercase;
 }
