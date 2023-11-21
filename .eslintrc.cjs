@@ -60,6 +60,7 @@ module.exports = {
             },
           },
         ],
+        'no-unused-vars': 'off',
       },
     },
     {
@@ -76,6 +77,12 @@ module.exports = {
       files: ['app/**/*.m.css.d.ts'],
       rules: {
         semi: 0,
+      },
+    },
+    {
+      files: ['app/**/*.test.tsx'],
+      env: {
+        jest: true,
       },
     },
   ],

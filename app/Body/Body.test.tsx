@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { create, act, ReactTestRenderer }  from 'react-test-renderer'
+import { create, act, ReactTestRenderer } from 'react-test-renderer'
 import { Body } from './Body'
 
 global.fetch = jest.fn(() =>
@@ -9,7 +9,6 @@ global.fetch = jest.fn(() =>
     status: 200,
   })
 ) as jest.Mock
-
 
 beforeEach(() => { (fetch as jest.Mock).mockClear() })
 

@@ -103,7 +103,7 @@ const config = {
         target: 'http://localhost:8081',
         pathRewrite: {
           // rewrite /api to /
-          '^/api': ''
+          '^/api': '',
         },
       },
     },

@@ -3,13 +3,15 @@ import * as styles from './Body.m.css'
 import { PanelContainer } from '../Panel/PanelContainer'
 import { Panel } from '../Panel/Panel'
 import { CurrentWeather } from '../CurrentWeather/CurrentWeather'
- import { Weather } from 'types/Weather'
+import { Weather } from 'types/Weather'
 
 type BodyState = {
   weatherData: Weather,
 }
 
-async function fetchData(setState: (bodyState: BodyState) => void): Promise<void> {
+async function fetchData (
+  setState: (bodyState: BodyState) => void
+): Promise<void> {
   const response = await fetch('/api/weather')
   if (!response.ok) {
     throw new Error('HTTP error, status = ' + response.status)
@@ -25,7 +27,7 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
     weatherData: {
       current: null,
       today: null,
-    }
+    },
   })
 
   useEffect(() => {
@@ -39,8 +41,8 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
       <PanelContainer>
         <Panel>
           <CurrentWeather currentWeather={state.weatherData.current}
-                          sunrise={state.weatherData.today?.sunrise}
-                          sunset={state.weatherData.today?.sunset}
+            sunrise={state.weatherData.today?.sunrise}
+            sunset={state.weatherData.today?.sunset}
           />
         </Panel>
       </PanelContainer>

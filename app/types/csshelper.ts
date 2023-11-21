@@ -6,6 +6,6 @@
  */
 
 declare module '*.m.css' {
-  var classes: any
+  let classes: any // eslint-disable-line
   export = classes
 }

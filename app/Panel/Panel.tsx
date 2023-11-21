@@ -5,7 +5,7 @@ type Props = {
   children?: React.ReactNode,
 }
 
-export const Panel: React.FC<Props> = ({children}): React.ReactElement => {
+export const Panel: React.FC<Props> = ({ children }): React.ReactElement => {
   return (
     <div className={styles.panel}>
       {children}

@@ -5,8 +5,9 @@ type Props = {
   children?: React.ReactNode
 }
 
-export const PanelContainer: React.FunctionComponent<Props> = ({children}): React.ReactElement => {
-  return (
-    <div className={styles.panelContainer}>{children}</div>
-  )
-}
+export const PanelContainer: React.FunctionComponent<Props> =
+  ({ children }): React.ReactElement => {
+    return (
+      <div className={styles.panelContainer}>{children}</div>
+    )
+  }
