@@ -3,7 +3,8 @@ import { Table } from '../Table/Table'
 import { Card } from '../Card/Card'
 import { Current } from 'types/Weather'
 import * as styles from './CurrentWeather.m.css'
-import * as convert from '../utils/conversion'
+import * as convert from '../utils/convert'
+import * as format from '../utils/format'
 
 type Props = {
   currentWeather: Current,
@@ -14,21 +15,6 @@ type Props = {
 enum DayPeriod {
   day,
   night,
-}
-
-function apiToFriendlyKeys (key: string): string {
-  const mappings: {[key: string]: string} = {
-    description: 'Current Weather',
-    temp: 'Temperature',
-    humidity: 'Humidity',
-    forecast: 'Forecast for Today',
-    uvi: 'UV Index',
-    visibility: 'Visibility',
-    windSpeed: 'Wind Speed',
-    pressure: 'Atmospheric Pressure',
-  }
-
-  return mappings[key] || key
 }
 
 function dayOrNight (
@@ -64,7 +50,7 @@ export const CurrentWeather: React.FC<Props> =
       (k: keyof Current) => {
         if (excludes.includes(k)) { return }
 
-        tableValues[apiToFriendlyKeys(k)] = currentWeather[k]
+        tableValues[convert.apiToFriendlyKeys(k)] = currentWeather[k]
       }
     )
 
@@ -76,11 +62,11 @@ export const CurrentWeather: React.FC<Props> =
       pressure,
     } = currentWeather
 
-    tableValues.Wind = `${windSpeed} mph ${windDirectionHuman}`
-    if (windGust) {
-      tableValues.Wind += `, gusting to ${windGust} mph`
-    }
-
+    tableValues.Wind = format.windData(
+      windSpeed,
+      windDirectionHuman,
+      windGust
+    )
     tableValues.Humidity += '%'
     tableValues.Visibility = visibility === 10000
       ? 'Unlimited'
@@ -88,13 +74,14 @@ export const CurrentWeather: React.FC<Props> =
     tableValues['Atmospheric Pressure'] = Math.round(convert.hPaToinHg(pressure)) + ' in'
   }
 
+  const description = format.capitalizeEveryWord(currentWeather?.description)
+
+  // Determine whether to use 'day' or 'night' iconography
   const period = dayOrNight(sunrise, sunset, Date.now())
   const suffix = period === DayPeriod.night ? '-n' : '-d'
-  const description = currentWeather?.description
-    .split(' ')
-    .map(x => `${x[0].toLocaleUpperCase()}${x.substr(1)}`)
-    .join(' ')
-  const weatherIcon = `owf owf-5x owf-${currentWeather?.condition}${suffix}`
+  const weatherIconClass =
+    convert.conditionCodeToIconClass(currentWeather?.condition)
+  const weatherIcon = `owf owf-5x ${weatherIconClass}${suffix}`
 
   return (
     <div>

@@ -1,0 +1,11 @@
+.todayWeatherDataContainer {
+  display: flex;
+}
+
+.todayWeatherDataContainer > * {
+  margin-right: 1rem;
+}
+
+.todayWeatherDataContainer > :last-child {
+  margin-right: 0;
+}

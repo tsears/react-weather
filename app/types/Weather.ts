@@ -19,6 +19,13 @@ export type Today = {
   low: number,
   sunrise: number,
   sunset: number,
+  condition: string,
+  chancePrecip: number,
+  rainAmount: number,
+  uvi: number,
+  windSpeed: number,
+  windDirectionHuman: string,
+  windGust: number,
 }
 
 export type Weather = {

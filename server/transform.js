@@ -68,7 +68,13 @@ function transformWeather (data) {
       low: Math.round(data.daily[0].temp.min),
       sunrise: data.current.sunrise,
       sunset: data.current.sunset,
-
+      condition: data.daily[0].weather[0].id,
+      chancePrecip: data.daily[0].pop,
+      rainAmount: data.daily[0].rain,
+      uvi: data.daily[0].uvi,
+      windSpeed: data.daily[0].wind_speed,
+      windDirectionHuman: windDirectionDegreesToHuman(data.daily[0].wind_deg),
+      windGust: data.daily[0].wind_gust,
     },
   }
 }

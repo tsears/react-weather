@@ -2,16 +2,17 @@
   border: 1px solid #cecece;
   border-radius: 5px;
   margin: 2rem 0;
-  padding: 1rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 10%;
+  width: 15%;
 }
 
 .card > * {
   display: block;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .card > div {

@@ -1,5 +1,13 @@
 .panelContainer {
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
+}
+
+.panelContainer > * {
+  margin-bottom: 2rem;
+}
+
+.panelContainer > :last-child {
+  margin-bottom: 0;
 }
