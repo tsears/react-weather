@@ -84,7 +84,7 @@ module.exports = {
     },
     // allow jest globals in test files
     {
-      files: ['app/**/*.test.tsx'],
+      files: ['app/**/*.test.tsx', 'app/**/*.test.ts'],
       env: {
         jest: true,
       },

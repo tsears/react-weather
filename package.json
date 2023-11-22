@@ -18,7 +18,8 @@
     "run-front": "webpack-dev-server",
     "run-back": "nodemon server/index.js --config nodemon.config.json",
     "start": "DEV=true rm -fR app/node_modules/.cache && npm-run-all --parallel run-front run-back",
-    "test": "jest"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "author": "Tom Sears",
   "license": "MIT",

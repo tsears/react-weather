@@ -1,17 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Body Component Renders correctly 1`] = `
-<div
-  className="body"
->
-  <h1
-    className="heading"
-  >
-    React Scaffold
-  </h1>
+<div>
   <div>
-    Ayy 
-    test
+    <div>
+      <div>
+        <h2>
+          Current Weather
+        </h2>
+        <div>
+          <div>
+            <i
+              className="owf owf-5x owf-undefined-d"
+            />
+            <div />
+            <div>
+              °
+            </div>
+          </div>
+          <table>
+            <tbody />
+          </table>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <h2>
+          Today's Weather
+        </h2>
+        <div>
+          <div>
+            <i
+              className="owf owf-5x owf-undefined"
+            />
+            <div />
+          </div>
+          <table>
+            <tbody />
+          </table>
+        </div>
+        <div>
+          <div>
+            <h3>
+              Hourly Temperature
+            </h3>
+            <canvas
+              id="chartContainer"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;
