@@ -44,7 +44,7 @@ export const CurrentWeather: React.FC<Props> =
   ]
 
   if (currentWeather) {
-    tableValues['Last Update'] = new Date(currentWeather.time * 1000).toLocaleString()
+    tableValues['Last Update'] = format.date(currentWeather.time)
 
     Object.keys(currentWeather).forEach(
       (k: keyof Current) => {

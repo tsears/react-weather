@@ -1,8 +1,12 @@
 export function date (timestamp: number): string {
-  const date = new Date(timestamp * 1000)
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  return `${hour % 12}:${minute < 10 ? '0' + minute : minute} ${hour < 12 ? 'AM' : 'PM'}`
+  return new Date(timestamp * 1000)
+    .toLocaleString(
+      'en-us',
+      {
+        dateStyle: 'short',
+        timeStyle: 'short',
+      }
+    )
 }
 
 export function asPercentage (value: number): string {
@@ -23,6 +27,9 @@ export function windData (
   windSpeed: number,
   windDirection: string,
   windGust: number): string {
+  if (windSpeed === 0) {
+    return 'No Wind'
+  }
   let wind = `${Math.round(windSpeed)} mph ${windDirection}`
   if (windGust) {
     wind += `, gusting to ${Math.round(windGust)} mph`
