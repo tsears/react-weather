@@ -12,6 +12,7 @@ $start: 6;
     @include heading-size($start);
     font-family: 'Cantarell', Helvetica, Arial, sans-serif;
     letter-spacing: -2px;
+    margin-bottom: 1rem;
   }
 
   $start: $start - 1

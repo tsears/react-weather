@@ -28,7 +28,13 @@ export type Today = {
   windGust: number,
 }
 
+export type HourlyForecast = {
+  time: number,
+  temp: number,
+}
+
 export type Weather = {
   current: Current,
   today: Today,
+  hourly: HourlyForecast[],
 }

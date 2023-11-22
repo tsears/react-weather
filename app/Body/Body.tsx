@@ -28,6 +28,7 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
     weatherData: {
       current: null,
       today: null,
+      hourly: null,
     },
   })
 
@@ -45,7 +46,10 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
           />
         </Panel>
         <Panel>
-          <TodayWeather todayWeather={state.weatherData.today}></TodayWeather>
+          <TodayWeather
+            todayWeather={state.weatherData.today}
+            hourlyWeather={state.weatherData.hourly}
+          ></TodayWeather>
         </Panel>
       </PanelContainer>
     </div>

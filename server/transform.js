@@ -47,6 +47,8 @@ function windDirectionDegreesToHuman (degrees) {
 }
 
 function transformWeather (data) {
+  const hourlyForecast = data.hourly.map(h => ({ time: h.dt, temp: h.temp }))
+
   return {
     current: {
       time: data.current.dt,
@@ -76,6 +78,7 @@ function transformWeather (data) {
       windDirectionHuman: windDirectionDegreesToHuman(data.daily[0].wind_deg),
       windGust: data.daily[0].wind_gust,
     },
+    hourly: hourlyForecast,
   }
 }
 

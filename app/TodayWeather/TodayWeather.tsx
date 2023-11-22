@@ -2,16 +2,18 @@ import * as React from 'react'
 import * as styles from './TodayWeather.m.css'
 import { Card } from '../Card/Card'
 import { Table } from '../Table/Table'
-import { Today } from 'types/Weather'
+import { TemperatureChart } from '../TemperatureChart/TemperatureChart'
+import { HourlyForecast, Today } from 'types/Weather'
 import * as convert from '../utils/convert'
 import * as format from '../utils/format'
 
 type Props = {
   todayWeather: Today,
+  hourlyWeather: HourlyForecast[],
 }
 
 export const TodayWeather: React.FC<Props> =
-({ todayWeather }: Props): React.ReactElement => {
+({ todayWeather, hourlyWeather }: Props): React.ReactElement => {
   const excludes: string[] = [
     'condition',
     'forecast',
@@ -76,6 +78,9 @@ export const TodayWeather: React.FC<Props> =
           <div>{todayWeather?.forecast}</div>
         </Card>
         <Table tableData={tableValues} />
+      </div>
+      <div>
+        <TemperatureChart hourlyWeather={hourlyWeather} />
       </div>
     </div>
   )
