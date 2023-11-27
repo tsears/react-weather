@@ -22,7 +22,8 @@ function dayOrNight (
   sunset: number,
   current: number
 ): DayPeriod {
-  if (current < sunrise || current > sunset) {
+  const convertedCurrent = current / 1000
+  if (convertedCurrent < sunrise || convertedCurrent > sunset) {
     return DayPeriod.night
   }
 
