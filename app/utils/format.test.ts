@@ -14,6 +14,19 @@ describe('utils/format', () => {
     })
   })
 
+  describe('time', () => {
+    it('formats a date as a us-based time string', () => {
+      // 11/21/23 5:41 PM Pacific Standard
+      // weird division by 1000 is because the weather api accessed by the
+      // application has the timestamp precision reduced by a factor of 1000
+      const randomDate = 1700617274438 / 1000
+
+      const formattedDate = format.time(randomDate)
+
+      expect(formattedDate).toBe('5:41 PM')
+    })
+  })
+
   describe('asPercentage', () => {
     it('converts the provided number to a string percentage representation', () => {
       const decimalPercentage = 0.7

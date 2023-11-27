@@ -9,6 +9,16 @@ export function date (timestamp: number): string {
     )
 }
 
+export function time (timestamp: number): string {
+  return new Date(timestamp * 1000)
+    .toLocaleString(
+      'en-us',
+      {
+        timeStyle: 'short',
+      }
+    )
+}
+
 export function asPercentage (value: number): string {
   return `${value * 100}%`
 }

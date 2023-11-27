@@ -36,7 +36,7 @@ export const TodayWeather: React.FC<Props> =
           break
         case 'sunrise':
         case 'sunset':
-          value = format.date(todayWeather[k])
+          value = format.time(todayWeather[k])
           break
         case 'chancePrecip':
           value = format.asPercentage(todayWeather[k])
