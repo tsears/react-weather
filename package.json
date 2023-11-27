@@ -13,6 +13,7 @@
     "build-front": "webpack && docker build -f Dockerfile.front . -t tsears/react-scaffold-front",
     "build-back": "docker build -f Dockerfile.back . -t tsears/react-scaffold-back",
     "lint": "eslint ./",
+    "lint-fix": "eslint ./ --fix",
     "run-docker-back": "docker run --name react-scaffold-back --network dockernet --rm -p 8081:8081 tsears/react-scaffold-back",
     "run-docker-front": "docker run --name react-scaffold-front --network dockernet --env APP_SHORTNAME=reactscaffold --env APP_API_URL=http://react-scaffold-back:8081 --rm -p 9000:80 tsears/react-scaffold-front",
     "run-front": "webpack-dev-server",

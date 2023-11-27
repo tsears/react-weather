@@ -1,0 +1,7 @@
+.forecastContainer {
+  display: flex;
+}
+
+.forecastContainer > * {
+  margin-right: 1rem;
+}

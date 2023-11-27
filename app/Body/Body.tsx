@@ -4,6 +4,7 @@ import { PanelContainer } from '../Panel/PanelContainer'
 import { Panel } from '../Panel/Panel'
 import { CurrentWeather } from '../CurrentWeather/CurrentWeather'
 import { TodayWeather } from '../TodayWeather/TodayWeather'
+import { ForecastWeather } from '../ForecastWeather/ForecastWeather'
 import { Weather } from 'types/Weather'
 
 type BodyState = {
@@ -29,6 +30,7 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
       current: null,
       today: null,
       hourly: null,
+      daily: null,
     },
   })
 
@@ -50,6 +52,11 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
             todayWeather={state.weatherData.today}
             hourlyWeather={state.weatherData.hourly}
           ></TodayWeather>
+        </Panel>
+        <Panel>
+          <ForecastWeather
+            forecastWeather={state.weatherData?.daily?.slice(1)}
+          ></ForecastWeather>
         </Panel>
       </PanelContainer>
     </div>

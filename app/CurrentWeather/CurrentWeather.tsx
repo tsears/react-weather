@@ -22,6 +22,8 @@ function dayOrNight (
   sunset: number,
   current: number
 ): DayPeriod {
+  // for some reason, sunrise/sunset are specified with more precision from the
+  // openweathermap api than the currnet time
   const convertedCurrent = current / 1000
   if (convertedCurrent < sunrise || convertedCurrent > sunset) {
     return DayPeriod.night

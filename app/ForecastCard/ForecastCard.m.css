@@ -1,0 +1,34 @@
+.tempContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  flex-grow: 1;
+}
+
+.dayAndIconContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.day {
+  margin-bottom: 1rem;
+}
+
+.icon:before {
+  vertical-align: middle;
+}
+
+.description {
+  font-size: 1rem !important;
+}
+
+.high {
+  color: #ef3725;
+  align-self: flex-end;
+}
+
+.low {
+  color: #15a3e0;
+  align-self: flex-end;
+}

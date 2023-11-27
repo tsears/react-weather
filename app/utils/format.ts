@@ -19,6 +19,16 @@ export function time (timestamp: number): string {
     )
 }
 
+export function dayOfWeek (timestamp: number): string {
+  return new Date(timestamp * 1000)
+    .toLocaleString(
+      'en-us',
+      {
+        weekday: 'long',
+      }
+    )
+}
+
 export function asPercentage (value: number): string {
   return `${value * 100}%`
 }
