@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import * as styles from './Body.m.css'
 import { PanelContainer } from '../Panel/PanelContainer'
 import { Panel } from '../Panel/Panel'
+import { SearchBar } from '../SearchBar/SearchBar'
 import { CurrentWeather } from '../CurrentWeather/CurrentWeather'
 import { TodayWeather } from '../TodayWeather/TodayWeather'
 import { ForecastWeather } from '../ForecastWeather/ForecastWeather'
@@ -41,6 +42,9 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
   return (
     <div className={styles.body}>
       <PanelContainer>
+        <Panel>
+          <SearchBar />
+        </Panel>
         <Panel>
           <CurrentWeather currentWeather={state.weatherData.current}
             sunrise={state.weatherData.today?.sunrise}
