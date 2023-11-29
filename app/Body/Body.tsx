@@ -14,6 +14,16 @@ type BodyState = {
   locationData: Location,
 }
 
+const DEFAULT_STATE: BodyState = {
+  weatherData: {
+    current: null,
+    today: null,
+    hourly: null,
+    daily: null,
+  },
+  locationData: null,
+}
+
 async function fetchWeatherData (lat: number, lon: number): Promise<Weather> {
   const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`)
   if (!response.ok) {
@@ -43,17 +53,10 @@ async function getWeatherForLocation (
 }
 
 export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
-  const [state, setState] = useState({
-    weatherData: {
-      current: null,
-      today: null,
-      hourly: null,
-      daily: null,
-    },
-    locationData: null,
-  })
+  const [state, setState] = useState(DEFAULT_STATE)
 
   const updateCallback = useCallback((query: string): Promise<void> => {
+    setState(DEFAULT_STATE)
     return getWeatherForLocation(setState, query)
   }, [])
 

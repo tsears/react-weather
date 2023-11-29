@@ -32,9 +32,9 @@ export const SearchBar: React.FC<Props> =
       callback(newQuery)
     }
 
-    navigator.geolocation.getCurrentPosition(async l => {
+    navigator.geolocation.getCurrentPosition(l => {
       const { latitude, longitude } = l.coords
-      await fetchLocationData(latitude, longitude)
+      fetchLocationData(latitude, longitude)
     })
   }, [callback])
 
