@@ -57,6 +57,7 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
     return getWeatherForLocation(setState, query)
   }, [])
 
+  const haveData = state.weatherData.current && state.locationData
 
   return (
     <div className={styles.body}>
@@ -64,24 +65,30 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
         <Panel>
           <SearchBar callback={updateCallback}/>
         </Panel>
-        <Panel>
-          <CurrentWeather currentWeather={state.weatherData.current}
-            location={state.locationData}
-            sunrise={state.weatherData.today?.sunrise}
-            sunset={state.weatherData.today?.sunset}
-          />
-        </Panel>
-        <Panel>
-          <TodayWeather
-            todayWeather={state.weatherData.today}
-            hourlyWeather={state.weatherData.hourly}
-          ></TodayWeather>
-        </Panel>
-        <Panel>
-          <ForecastWeather
-            forecastWeather={state.weatherData?.daily?.slice(1)}
-          ></ForecastWeather>
-        </Panel>
+        { haveData && (
+          <Panel>
+            <CurrentWeather currentWeather={state.weatherData.current}
+              location={state.locationData}
+              sunrise={state.weatherData.today?.sunrise}
+              sunset={state.weatherData.today?.sunset}
+            />
+          </Panel>
+        )}
+        { haveData && (
+          <Panel>
+            <TodayWeather
+              todayWeather={state.weatherData.today}
+              hourlyWeather={state.weatherData.hourly}
+            ></TodayWeather>
+          </Panel>
+        )}
+        { haveData && (
+          <Panel>
+            <ForecastWeather
+              forecastWeather={state.weatherData?.daily?.slice(1)}
+            ></ForecastWeather>
+          </Panel>
+        )}
       </PanelContainer>
     </div>
   )
