@@ -5,3 +5,9 @@ export type Location = {
   lat: number,
   lon: number,
 }
+
+export type ReverseLocation = {
+  city: string,
+  state: string,
+  country: string,
+}

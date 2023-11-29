@@ -50,6 +50,34 @@ app.get('/geo', async (req, res) => {
   }
 })
 
+app.get('/geo/reverse', async (req, res) => {
+  const { lat, lon } = req.query
+
+  if (!lat || !lon) {
+    res.status(400).send('Missing query data')
+    return
+  }
+
+  const queryParams = {
+    lat,
+    lon,
+    appId: WEATHER_API_KEY,
+  }
+
+  const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?${new URLSearchParams(queryParams)}`)
+  const locationData = await response.json()
+
+  if (locationData.length > 0) {
+    res.json({
+      city: locationData[0].name,
+      state: locationData[0]?.state || '',
+      country: locationData[0].country,
+    })
+  } else {
+    res.status(400).send('No location found')
+  }
+})
+
 app.get('/weather', async (req, res) => {
   const { lat, lon } = req.query
 

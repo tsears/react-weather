@@ -10,6 +10,12 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
+Object.defineProperty(global.navigator, 'geolocation', {
+  value: {
+    getCurrentPosition: jest.fn(),
+  },
+})
+
 beforeEach(() => { (fetch as jest.Mock).mockClear() })
 
 describe('Body Component', () => {
