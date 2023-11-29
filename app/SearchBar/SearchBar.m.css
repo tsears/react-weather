@@ -24,4 +24,5 @@
   height: 3.25rem;
   width: 3.25rem;
   border-radius: 0 5px 5px 0;
+  cursor: pointer;
 }

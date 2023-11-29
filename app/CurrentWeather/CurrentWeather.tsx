@@ -2,12 +2,14 @@ import React from 'react'
 import { Table } from '../Table/Table'
 import { Card } from '../Card/Card'
 import { Current } from 'types/Weather'
+import { Location } from 'types/Location'
 import * as styles from './CurrentWeather.m.css'
 import * as convert from '../utils/convert'
 import * as format from '../utils/format'
 
 type Props = {
   currentWeather: Current,
+  location: Location,
   sunrise: number,
   sunset: number,
 }
@@ -33,7 +35,7 @@ function dayOrNight (
 }
 
 export const CurrentWeather: React.FC<Props> =
-({ currentWeather, sunrise, sunset }: Props): React.ReactElement => {
+({ currentWeather, location, sunrise, sunset }: Props): React.ReactElement => {
   const tableValues: {[key: string]: string | number} = {}
   const excludes = [
     'description',
@@ -88,7 +90,7 @@ export const CurrentWeather: React.FC<Props> =
 
   return (
     <div>
-      <h2>Current Weather</h2>
+      <h2>Current Weather for {location?.city}, {location?.state}</h2>
       <div className={styles.currentWeatherDataContainer}>
         <Card>
           <i className={weatherIcon}></i>

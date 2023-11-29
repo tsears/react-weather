@@ -7,22 +7,39 @@ import { CurrentWeather } from '../CurrentWeather/CurrentWeather'
 import { TodayWeather } from '../TodayWeather/TodayWeather'
 import { ForecastWeather } from '../ForecastWeather/ForecastWeather'
 import { Weather } from 'types/Weather'
+import { Location } from 'types/Location'
 
 type BodyState = {
   weatherData: Weather,
+  locationData: Location,
 }
 
-async function fetchData (
-  setState: (bodyState: BodyState) => void
-): Promise<void> {
-  const response = await fetch('/api/weather')
+async function fetchWeatherData (lat: number, lon: number): Promise<Weather> {
+  const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`)
   if (!response.ok) {
     throw new Error('HTTP error, status = ' + response.status)
   }
 
-  const data = await response.json() as Weather
+  return await response.json() as Weather
+}
 
-  setState({ weatherData: data })
+async function fetchGeoData (query: string): Promise<Location> {
+  const response = await fetch(`/api/geo?q=${query}`)
+  if (!response.ok) {
+    throw new Error('HTTP error, status = ' + response.status)
+  }
+
+  return await response.json() as Location
+}
+
+async function getWeatherForLocation (
+  setState: (bodyState: BodyState) => void,
+  location: string
+): Promise<void> {
+  const locationData = await fetchGeoData(location)
+  const weatherData = await fetchWeatherData(locationData.lat, locationData.lon)
+
+  setState({ weatherData, locationData })
 }
 
 export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
@@ -33,20 +50,26 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
       hourly: null,
       daily: null,
     },
+    locationData: null,
   })
 
+  const updateCallback = (query: string): Promise<void> => {
+    return getWeatherForLocation(setState, query)
+  }
+
   useEffect(() => {
-    fetchData(setState)
+    updateCallback('Forest Grove, OR')
   }, [])
 
   return (
     <div className={styles.body}>
       <PanelContainer>
         <Panel>
-          <SearchBar />
+          <SearchBar callback={updateCallback}/>
         </Panel>
         <Panel>
           <CurrentWeather currentWeather={state.weatherData.current}
+            location={state.locationData}
             sunrise={state.weatherData.today?.sunrise}
             sunset={state.weatherData.today?.sunset}
           />

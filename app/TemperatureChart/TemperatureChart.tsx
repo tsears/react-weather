@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Chart from 'chart.js/auto'
 import * as styles from './TemperatureChart.m.css'
 import { HourlyForecast } from 'types/Weather'
@@ -9,7 +9,11 @@ type Props = {
 
 export const TemperatureChart: React.FC<Props> =
 ({ hourlyWeather }: Props): React.ReactElement => {
-  if (hourlyWeather) {
+  useEffect(() => {
+    if (!hourlyWeather) {
+      return
+    }
+
     const container = document.getElementById('chartContainer')
 
     const data = hourlyWeather.map(h => Math.round(h.temp))
@@ -17,7 +21,7 @@ export const TemperatureChart: React.FC<Props> =
 
     // I don't make the apis....
     // eslint-disable-next-line no-new
-    new Chart(
+    const chart = new Chart(
       container as HTMLCanvasElement,
       {
         type: 'line',
@@ -64,7 +68,13 @@ export const TemperatureChart: React.FC<Props> =
         },
       }
     )
-  }
+
+    return () => {
+      if (chart) {
+        chart.destroy()
+      }
+    }
+  }, [hourlyWeather])
 
   return (
     <div className={styles.chartContainer}>

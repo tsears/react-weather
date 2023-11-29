@@ -9,12 +9,9 @@ type Props = {
 
 export const ForecastWeather: React.FC<Props> =
 ({ forecastWeather }: Props): React.ReactElement => {
-  console.log('fw', forecastWeather)
   const cards = forecastWeather?.map(f => (
     <ForecastCard forecast={f} key={f.time}></ForecastCard>
   ))
-
-  console.log(cards)
 
   return (
     <div>
