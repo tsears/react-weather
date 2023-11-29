@@ -24,7 +24,7 @@ export const SearchBar: React.FC<Props> =
 
   useEffect(() => {
     const fetchLocationData = async (lat: number, lon: number) => {
-      const response = await fetch(`/geo/reverse?lat=${lat}&lon=${lon}`)
+      const response = await fetch(`/api/geo/reverse?lat=${lat}&lon=${lon}`)
       const { city, state, country } = await response.json() as ReverseLocation
       const newQuery = `${city}${state ? ', ' : ''}${state}, ${country}`
 

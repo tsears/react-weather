@@ -2,20 +2,21 @@
   "name": "react-Scaffold",
   "type": "module",
   "version": "0.0.0",
-  "description": "Web app scaffold with React/Node/Typescript/Webpack",
+  "description": "Simple weather info site",
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tsears/react-scaffold.git"
+    "url": "https://github.com/tsears/react-weather.git"
   },
   "scripts": {
     "build": "webpack",
-    "build-front": "webpack && docker build -f Dockerfile.front . -t tsears/react-scaffold-front",
-    "build-back": "docker build -f Dockerfile.back . -t tsears/react-scaffold-back",
+    "build-front": "webpack && docker build -f Dockerfile.front . -t tsears/react-weather-front",
+    "build-back": "docker build -f Dockerfile.back . -t tsears/react-weather-back",
     "lint": "eslint ./",
     "lint-fix": "eslint ./ --fix",
-    "run-docker-back": "docker run --name react-scaffold-back --network dockernet --rm -p 8081:8081 tsears/react-scaffold-back",
-    "run-docker-front": "docker run --name react-scaffold-front --network dockernet --env APP_SHORTNAME=reactscaffold --env APP_API_URL=http://react-scaffold-back:8081 --rm -p 9000:80 tsears/react-scaffold-front",
+    "run-docker-back": "docker run --name react-weather-back --network dockernet --rm -p 8081:8081 tsears/react-weather-back",
+    "run-docker-front": "docker run --name react-weather-front --network dockernet --env APP_SHORTNAME=reactscaffold --env APP_API_URL=http://react-weather-back:8081 --rm -p 9000:80 tsears/react-weather-front",
+    "run-docker": "npm run build && docker-compose up --build",
     "run-front": "webpack-dev-server",
     "run-back": "nodemon server/index.js --config nodemon.config.json",
     "start": "DEV=true rm -fR app/node_modules/.cache && npm-run-all --parallel run-front run-back",
