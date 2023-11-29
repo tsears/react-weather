@@ -36,7 +36,7 @@ export const SearchBar: React.FC<Props> =
       const { latitude, longitude } = l.coords
       await fetchLocationData(latitude, longitude)
     })
-  })
+  }, [callback])
 
   return (
     <div className={styles.searchBarContainer}>

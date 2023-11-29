@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import * as styles from './Body.m.css'
 import { PanelContainer } from '../Panel/PanelContainer'
 import { Panel } from '../Panel/Panel'
@@ -53,9 +53,10 @@ export const Body: React.FunctionComponent<{}> = (): React.ReactElement => {
     locationData: null,
   })
 
-  const updateCallback = (query: string): Promise<void> => {
+  const updateCallback = useCallback((query: string): Promise<void> => {
     return getWeatherForLocation(setState, query)
-  }
+  }, [])
+
 
   return (
     <div className={styles.body}>
