@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as styles from './Header.m.css'
-import { GitHub } from '../assets/Icons/Icons'
+import { SearchBar } from '../SearchBar/SearchBar'
 
 export const Header: React.FunctionComponent<{}> = (): React.ReactElement => (
   <div className={styles.header}>
@@ -8,9 +8,7 @@ export const Header: React.FunctionComponent<{}> = (): React.ReactElement => (
       Weather
     </h1>
     <div>
-      <a href='https://github.com/tsears/react-weather'>
-        { GitHub }
-      </a>
+        <SearchBar callback={() => {}}/>
     </div>
   </div>
 )

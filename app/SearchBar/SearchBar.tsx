@@ -40,7 +40,7 @@ export const SearchBar: React.FC<Props> =
 
   return (
     <div className={styles.searchBarContainer}>
-      <h2>Search</h2>
+      <div className={styles.searchLabel}>Search</div>
       <div className={styles.searchBoxContainer}>
         <input
           value={query}
