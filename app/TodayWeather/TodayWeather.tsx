@@ -32,7 +32,7 @@ export const TodayWeather: React.FC<Props> =
         switch (k) {
         case 'high':
         case 'low':
-          value = todayWeather[k] + '°'
+          value = todayWeather[k] + '\u00b0'
           break
         case 'sunrise':
         case 'sunset':

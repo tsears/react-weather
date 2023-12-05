@@ -24,8 +24,8 @@ export const ForecastCard: React.FC<Props> =
         {forecast.description}
       </div>
       <div className={styles.tempContainer}>
-        <div className={styles.low}>{Math.round(forecast.low)}°</div>
-        <div className={styles.high}>{Math.round(forecast.high)}°</div>
+        <div className={styles.low}>{Math.round(forecast.low) + '\u00b0'}</div>
+        <div className={styles.high}>{Math.round(forecast.high) + '\u00b0'}</div>
       </div>
     </Card>
   )

@@ -75,7 +75,7 @@ export const CurrentWeather: React.FC<Props> =
     tableValues.Humidity += '%'
     tableValues.Visibility = visibility === 10000
       ? 'Unlimited'
-      : convert.metersToMiles(visibility) + 'miles'
+      : Math.round(convert.metersToMiles(visibility)) + ' miles'
     tableValues['Atmospheric Pressure'] = Math.round(convert.hPaToinHg(pressure)) + ' in'
   }
 
@@ -95,7 +95,7 @@ export const CurrentWeather: React.FC<Props> =
         <Card>
           <i className={weatherIcon}></i>
           <div>{description}</div>
-          <div>{currentWeather?.temp}°</div>
+          <div>{currentWeather?.temp + '\u00b0'}</div>
         </Card>
         <Table tableData={tableValues} />
       </div>
