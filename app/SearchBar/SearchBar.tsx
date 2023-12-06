@@ -45,7 +45,7 @@ export const SearchBar: React.FC<Props> =
         <input
           value={query}
           className={styles.searchBoxInput}
-          placeholder="City, ST or zip"
+          placeholder="City, ST"
           onInput={e => setQuery((e.target as HTMLInputElement).value)}
           onKeyUp={onSubmit}
         ></input>

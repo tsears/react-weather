@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "build-front": "webpack && docker build -f Dockerfile.front . -t tsears/react-weather-front",
+    "build-front": "webpack --mode=production && docker build -f Dockerfile.front . -t tsears/react-weather-front",
     "build-back": "docker build -f Dockerfile.back . -t tsears/react-weather-back",
     "lint": "eslint ./",
     "lint-fix": "eslint ./ --fix",
