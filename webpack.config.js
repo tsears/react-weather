@@ -94,6 +94,11 @@ const config = {
     hot: true,
     host: '0.0.0.0',
     port: 9000,
+    watchFiles: [
+      'app/**/*.tsx',
+      'app/**/*.m.css',
+      'app/**/*.ts',
+    ],
     static: {
       directory: path.join(__dirname, 'dist'),
     },

@@ -107,4 +107,7 @@ app.get('*', (req, res) => {
   res.json({})
 })
 
-app.listen(port, () => console.log(`react-weather backend listening on port ${port}!`))
+app.listen(
+  port,
+  () => console.log(`react-weather backend listening on port ${port}!`)
+)

@@ -23,7 +23,7 @@ describe('Body Component', () => {
     let tree: ReactTestRenderer
 
     await act(() => {
-      tree = create(<Body weatherData={undefined} locationData={undefined}></Body>)
+      tree = create(<Body weatherData={undefined} locationData={undefined}/>)
     })
 
     expect((tree).toJSON()).toMatchSnapshot()

@@ -5,8 +5,10 @@ import * as styles from './app.m.css'
 import { Header } from './Header/Header'
 import { Body } from './Body/Body'
 import { Footer } from './Footer/Footer'
+import { Toaster, ToastRef } from './Toaster/Toaster'
+import { SearchBar } from './SearchBar/SearchBar'
 
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useRef, Ref } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import { Weather } from 'types/Weather'
@@ -28,18 +30,14 @@ const DEFAULT_STATE: State = {
 }
 
 async function fetchWeatherData (lat: number, lon: number): Promise<Weather> {
-  const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`)
-  if (!response.ok) {
-    throw new Error('HTTP error, status = ' + response.status)
-  }
-
-  return await response.json() as Weather
+  const data = await fetch(`/api/weather?lat=${lat}&lon=${lon}`)
+  return await data.json()
 }
 
 async function fetchGeoData (query: string): Promise<Location> {
   const response = await fetch(`/api/geo?q=${query}`)
   if (!response.ok) {
-    throw new Error('HTTP error, status = ' + response.status)
+    throw new Error(await response.text())
   }
 
   return await response.json() as Location
@@ -54,19 +52,31 @@ async function getWeatherForLocation (
 
   setState({ weatherData, locationData })
 }
+
 export const App: React.FunctionComponent<{}> = (): React.ReactElement => {
   const [state, setState] = useState(DEFAULT_STATE)
+  const toaster: Ref<ToastRef> = useRef()
 
-  const updateCallback = useCallback((query: string): Promise<void> => {
+  const updateCallback = useCallback(async (query: string): Promise<void> => {
     setState(DEFAULT_STATE)
-    return getWeatherForLocation(setState, query)
+
+    try {
+      return await getWeatherForLocation(setState, query)
+    } catch (e) {
+      toaster.current.toast(e.message)
+    }
   }, [])
 
   return (
     <div className={styles.app}>
-      <Header updateCallback={updateCallback} />
-      <Body weatherData={state.weatherData} locationData={state.locationData} />
+      <Header>
+        <SearchBar callback={updateCallback}/>
+      </Header>
+      <Body weatherData={state.weatherData}
+        locationData={state.locationData}
+      />
       <Footer />
+      <Toaster ref={toaster} />
     </div>
   )
 }

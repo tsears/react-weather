@@ -15,7 +15,7 @@ type BodyProps = {
 
 export const Body: React.FC<BodyProps> =
 ({ weatherData, locationData }: BodyProps): React.ReactElement => {
-  const haveData = weatherData.current && locationData
+  const haveData = weatherData?.current && locationData
 
   return (
     <div className={styles.body}>
