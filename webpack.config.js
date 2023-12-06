@@ -24,7 +24,7 @@ const config = {
     library: '[name]',
     libraryTarget: 'umd',
   },
-  devtool: 'eval',
+  devtool: 'eval-cheap-module-source-map',
   module: {
     rules: [
       {

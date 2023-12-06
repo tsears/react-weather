@@ -6,8 +6,9 @@ type Props = {
 }
 
 export const Card: React.FC<Props> = ({ children }): React.ReactElement => {
+  const cardClasses = `${styles.card} card`
   return (
-    <div className={styles.card}>
+    <div className={cardClasses}>
       {children}
     </div>
   )

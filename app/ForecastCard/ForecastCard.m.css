@@ -2,13 +2,6 @@
   display: flex;
   justify-content: space-between;
   width: 70%;
-  flex-grow: 1;
-}
-
-.dayAndIconContainer {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
 }
 
 .day {
@@ -31,4 +24,10 @@
 .low {
   color: #15a3e0;
   align-self: flex-end;
+}
+
+@media only screen and (max-width: 767px) {
+  .tempContainer {
+    width: 25%;
+  }
 }
