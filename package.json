@@ -1,5 +1,5 @@
 {
-  "name": "react-Scaffold",
+  "name": "react-weather",
   "type": "module",
   "version": "0.0.0",
   "description": "Simple weather info site",
@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "build-front": "webpack --mode=production && docker build -f Dockerfile.front . -t tsears/react-weather-front",
+    "build-front": "BUILD_MODE=production webpack --mode=production && docker build -f Dockerfile.front . -t tsears/react-weather-front",
     "build-back": "docker build -f Dockerfile.back . -t tsears/react-weather-back",
     "lint": "eslint ./",
     "lint-fix": "eslint ./ --fix",

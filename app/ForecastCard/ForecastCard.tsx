@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import * as styles from './ForecastCard.m.css'
 import { Daily } from 'types/Weather'
 import { Card } from '../Card/Card'

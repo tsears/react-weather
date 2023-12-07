@@ -24,7 +24,6 @@ const config = {
     library: '[name]',
     libraryTarget: 'umd',
   },
-  devtool: 'eval-cheap-module-source-map',
   module: {
     rules: [
       {
@@ -113,6 +112,10 @@ const config = {
       },
     },
   },
+}
+
+if (config.mode === 'development') {
+  config.devtool = 'eval-cheap-module-source-map'
 }
 
 export default config

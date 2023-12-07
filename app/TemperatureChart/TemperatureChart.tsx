@@ -1,7 +1,26 @@
 import React, { useEffect } from 'react'
-import Chart from 'chart.js/auto'
 import * as styles from './TemperatureChart.m.css'
 import { HourlyForecast } from 'types/Weather'
+// attempt to keep bundle size under control, chartjs is huge and we're only
+// using line chart
+import {
+  Chart,
+  Colors,
+  LineController,
+  LineElement,
+  LinearScale,
+  CategoryScale,
+  PointElement,
+} from 'chart.js'
+
+Chart.register(
+  Colors,
+  LineController,
+  LineElement,
+  LinearScale,
+  CategoryScale,
+  PointElement
+)
 
 type Props = {
   hourlyWeather: HourlyForecast[],
