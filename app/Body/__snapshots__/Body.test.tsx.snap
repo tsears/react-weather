@@ -2,6 +2,15 @@
 
 exports[`Body Component Renders correctly 1`] = `
 <div>
-  <div />
+  <div>
+    <div>
+      <div>
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
+    </div>
+  </div>
 </div>
 `;

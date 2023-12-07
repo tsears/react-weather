@@ -2,6 +2,7 @@ import React from 'react'
 import * as styles from './Body.m.css'
 import { PanelContainer } from '../Panel/PanelContainer'
 import { Panel } from '../Panel/Panel'
+import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner'
 import { CurrentWeather } from '../CurrentWeather/CurrentWeather'
 import { TodayWeather } from '../TodayWeather/TodayWeather'
 import { ForecastWeather } from '../ForecastWeather/ForecastWeather'
@@ -20,6 +21,11 @@ export const Body: React.FC<BodyProps> =
   return (
     <div className={styles.body}>
       <PanelContainer>
+        { !haveData && (
+          <Panel>
+            <LoadingSpinner />
+          </Panel>
+        )}
         { haveData && (
           <Panel>
             <CurrentWeather currentWeather={weatherData.current}
