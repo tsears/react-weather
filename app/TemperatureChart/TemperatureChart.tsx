@@ -14,10 +14,32 @@ export const TemperatureChart: React.FC<Props> =
       return
     }
 
+    const small = window.matchMedia('(max-width: 767px)').matches
+
     const container = document.getElementById('chartContainer')
 
-    const data = hourlyWeather.map(h => Math.round(h.temp))
-    const labels = hourlyWeather.map(h => h.time)
+    let data: number[]
+    let labels: number[]
+
+    if (small) {
+      data = hourlyWeather.reduce((acc, current, index): number[] => {
+        if (index % 5 === 0) {
+          acc.push(Math.round(current.temp))
+        }
+        return acc
+      }, [])
+
+      labels = hourlyWeather.reduce((acc, current, index): string[] => {
+        if (index % 5 === 0) {
+          acc.push(current.time)
+        }
+
+        return acc
+      }, [])
+    } else {
+      data = hourlyWeather.map(h => Math.round(h.temp))
+      labels = hourlyWeather.map(h => h.time)
+    }
 
     // I don't make the apis....
     // eslint-disable-next-line no-new
@@ -43,12 +65,21 @@ export const TemperatureChart: React.FC<Props> =
               display: false,
             },
           },
+          elements: {
+            line: {
+              tension: 0.4,
+            },
+          },
           scales: {
             x: {
               ticks: {
-                maxTicksLimit: 20,
+                align: small ? 'start' : 'center',
+                maxTicksLimit: small ? 2 : 20,
                 color: '#eee',
                 maxRotation: 0,
+                font: {
+                  size: small ? 8 : 16,
+                },
               },
               grid: {
                 color: '#aaa',
@@ -58,6 +89,9 @@ export const TemperatureChart: React.FC<Props> =
               ticks: {
                 maxTicksLimit: 10,
                 color: '#eee',
+                font: {
+                  size: small ? 8 : 16,
+                },
               },
               grid: {
                 color: '#aaa',

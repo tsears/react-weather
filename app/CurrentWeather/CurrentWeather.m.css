@@ -9,3 +9,16 @@
 .currentWeatherDataContainer > :last-child {
   margin-right: 0;
 }
+
+@media screen and (max-width: 767px) {
+  .currentWeatherDataContainer {
+    flex-direction: column;
+  }
+
+  /* The weird attribute selector on class is in order to reference a plain
+   * non-module classname on a child element */
+  .currentWeatherDataContainer > [class*="card"] {
+    margin: 1rem 0;
+    width: auto;
+  }
+}

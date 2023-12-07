@@ -12,7 +12,7 @@ export const HourlyWeather: React.FC<Props> =
 ({ hourlyWeather }: Props): React.ReactElement => {
   const hourlyWeatherData = (): React.ReactElement[] =>
     hourlyWeather.slice(0, 12).map(w => (
-      <div className={styles.hourlyForecastItem}>
+      <div className={styles.hourlyForecastItem} key={w.time}>
         <div className={styles.hourlyTickMark} />
         <div>{format.time(w.time)}</div>
         <div>
