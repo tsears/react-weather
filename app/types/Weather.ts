@@ -39,6 +39,8 @@ export type Daily = {
 export type HourlyForecast = {
   time: number,
   temp: number,
+  description: string,
+  condition: number,
 }
 
 export type Weather = {

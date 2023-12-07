@@ -47,16 +47,20 @@ function windDirectionDegreesToHuman (degrees) {
 }
 
 function transformWeather (data) {
-  const hourlyForecast = data.hourly.map(h => ({ time: h.dt, temp: h.temp }))
-  const dailyForecast = data.daily.map(d => {
-    return {
-      time: d.dt,
-      description: d.summary,
-      high: d.temp.max,
-      low: d.temp.min,
-      condition: d.weather[0].id,
-    }
-  })
+  const hourlyForecast = data.hourly.map(h => ({
+    time: h.dt,
+    temp: h.temp,
+    description: h.weather[0].description,
+    condition: h.weather[0].id,
+  }))
+
+  const dailyForecast = data.daily.map(d => ({
+    time: d.dt,
+    description: d.summary,
+    high: d.temp.max,
+    low: d.temp.min,
+    condition: d.weather[0].id,
+  }))
 
   return {
     current: {
