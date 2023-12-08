@@ -19,6 +19,9 @@ const config: Config.InitialOptions = {
     '/dist/',
     '.*.d.ts',
   ],
+  setupFiles: [
+    './test/mocks.ts',
+  ],
 }
 
 export default config
