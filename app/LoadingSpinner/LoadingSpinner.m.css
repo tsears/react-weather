@@ -1,9 +1,11 @@
+.loadingRingContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .ldsRing {
-  display: inline-block;
-  position: relative;
   width: 80px;
   height: 80px;
-  margin: 0 50%;
 }
 .ldsRing div {
   box-sizing: border-box;
